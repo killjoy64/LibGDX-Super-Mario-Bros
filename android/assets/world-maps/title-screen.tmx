@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="13" tilewidth="16" tileheight="16" nextobjectid="56">
+ <tileset firstgid="1" name="Default Tilesheet" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
+  <image source="../tilesheets/default_tilesheet.png" width="594" height="504"/>
+ </tileset>
+ <layer name="Background" width="16" height="13">
+  <data encoding="base64" compression="zlib">
+   eJz7zcTA8HsUj+JRTBYGALphzZE=
+  </data>
+ </layer>
+ <layer name="Graphics" width="16" height="13">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo4CBQYiRfL2CQL1GQCxMhhkwvaVAXEbADFOgnBkSNgdikPKBxAD4XQLm
+  </data>
+ </layer>
+ <objectgroup name="Solids">
+  <object id="2" x="0" y="176" width="16" height="16"/>
+  <object id="7" x="16" y="176" width="16" height="16"/>
+  <object id="8" x="32" y="176" width="16" height="16"/>
+  <object id="9" x="48" y="176" width="16" height="16"/>
+  <object id="10" x="64" y="176" width="16" height="16"/>
+  <object id="11" x="80" y="176" width="16" height="16"/>
+  <object id="12" x="96" y="176" width="16" height="16"/>
+  <object id="13" x="112" y="176" width="16" height="16"/>
+  <object id="14" x="128" y="176" width="16" height="16"/>
+  <object id="16" x="144" y="176" width="16" height="16"/>
+  <object id="17" x="160" y="176" width="16" height="16"/>
+  <object id="18" x="176" y="176" width="16" height="16"/>
+  <object id="19" x="192" y="176" width="16" height="16"/>
+  <object id="20" x="208" y="176" width="16" height="16"/>
+  <object id="21" x="224" y="176" width="16" height="16"/>
+  <object id="22" x="240" y="176" width="16" height="16"/>
+  <object id="23" x="0" y="192" width="16" height="16"/>
+  <object id="24" x="16" y="192" width="16" height="16"/>
+  <object id="25" x="32" y="192" width="16" height="16"/>
+  <object id="26" x="48" y="192" width="16" height="16"/>
+  <object id="27" x="64" y="192" width="16" height="16"/>
+  <object id="28" x="80" y="192" width="16" height="16"/>
+  <object id="29" x="96" y="192" width="16" height="16"/>
+  <object id="30" x="112" y="192" width="16" height="16"/>
+  <object id="31" x="128" y="192" width="16" height="16"/>
+  <object id="33" x="144" y="192" width="16" height="16"/>
+  <object id="34" x="160" y="192" width="16" height="16"/>
+  <object id="35" x="176" y="192" width="16" height="16"/>
+  <object id="36" x="192" y="192" width="16" height="16"/>
+  <object id="37" x="208" y="192" width="16" height="16"/>
+  <object id="38" x="224" y="192" width="16" height="16"/>
+  <object id="39" x="240" y="192" width="16" height="16"/>
+ </objectgroup>
+</map>
