@@ -29,8 +29,6 @@ public abstract class Entity extends Sprite {
         this.map = map;
         this.isDead = false;
         this.direction = 2;
-
-        createBody();
     }
 
     public abstract void createBody();

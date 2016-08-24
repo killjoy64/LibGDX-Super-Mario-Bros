@@ -82,7 +82,7 @@ public class TitleScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         worldDebugger = new Box2DDebugRenderer();
-        tileCreator = new TileCreator(world, tiledMap);
+        tileCreator = new TileCreator(world, tiledMap, null);
 
         tileCreator.create();
         player = new Mario(world, tiledMap);

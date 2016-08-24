@@ -12,14 +12,18 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.stacktracemusic.mariobros.GameWindow;
 import com.stacktracemusic.mariobros.entities.Mario;
+import com.stacktracemusic.mariobros.items.Item;
 import com.stacktracemusic.mariobros.listeners.GamePlayInputListener;
 import com.stacktracemusic.mariobros.util.Config;
 import com.stacktracemusic.mariobros.util.Resources;
+import com.stacktracemusic.mariobros.world.CollisionListener;
 import com.stacktracemusic.mariobros.world.GameData;
+import com.stacktracemusic.mariobros.world.ItemManager;
 import com.stacktracemusic.mariobros.world.TileCreator;
 
 /**
@@ -40,6 +44,7 @@ public class GamePlayScreen implements Screen {
     private TmxMapLoader mapLoader;
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer mapRenderer;
+    private ItemManager itemManager;
 
     private World world;
     private Box2DDebugRenderer worldDebugger;
@@ -70,10 +75,13 @@ public class GamePlayScreen implements Screen {
 
         world = new World(new Vector2(0, -10), true);
         worldDebugger = new Box2DDebugRenderer();
-        tileCreator = new TileCreator(world, tiledMap);
+        itemManager = new ItemManager();
+        tileCreator = new TileCreator(world, tiledMap, itemManager);
         player = new Mario(world, tiledMap);
 
+        world.setContactListener(new CollisionListener());
         player.setAssetManager(game.getAssetManager());
+        player.setGameData(gameData);
         tileCreator.create();
 
         gameCam.position.set(gameViewport.getWorldWidth() / 2, gameViewport.getWorldHeight() / 2, 0);
@@ -99,6 +107,7 @@ public class GamePlayScreen implements Screen {
         world.step(1 / 60f, 6, 2);
         player.update(delta);
         gameCam.update();
+        itemManager.update(delta);
         mapRenderer.setView(gameCam);
 
         if (player.isDead() == false) {
@@ -122,11 +131,12 @@ public class GamePlayScreen implements Screen {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             mapRenderer.render();
-            //worldDebugger.render(world, gameCam.combined);
+            worldDebugger.render(world, gameCam.combined);
 
             game.getBatch().setProjectionMatrix(gameCam.combined);
             game.getBatch().begin();
             player.draw(game.getBatch());
+            itemManager.draw(game.getBatch());
             game.getBatch().end();
 
             game.getBatch().setProjectionMatrix(overlayCam.combined);

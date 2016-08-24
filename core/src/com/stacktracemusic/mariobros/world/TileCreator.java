@@ -8,6 +8,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.stacktracemusic.mariobros.util.Config;
+import com.stacktracemusic.mariobros.world.tiles.BrickTile;
+import com.stacktracemusic.mariobros.world.tiles.ItemBlockTile;
+import com.stacktracemusic.mariobros.world.tiles.SolidTile;
+import com.stacktracemusic.mariobros.world.tiles.Tile;
 
 /**
  * Created by Kyle Flynn on 4/9/2016.
@@ -19,12 +23,14 @@ public class TileCreator {
 
     private World world;
     private TiledMap tiledMap;
+    private ItemManager itemManager;
 
     private Array<Integer> tileLayers;
 
-    public TileCreator(World world, TiledMap tiledMap) {
+    public TileCreator(World world, TiledMap tiledMap, ItemManager itemManager) {
         this.world = world;
         this.tiledMap = tiledMap;
+        this.itemManager = itemManager;
 
         tileLayers = new Array<Integer>();
         tileLayers.add(SOLIDS_LAYER);
@@ -32,26 +38,32 @@ public class TileCreator {
 
     public void create() {
 
-        BodyDef bodyDef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fixture = new FixtureDef();
-        Body body;
-
         for (int layer : tileLayers) {
-            for (MapObject object : tiledMap.getLayers().get(layer).getObjects()) {
-                Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-
-                bodyDef.type = BodyDef.BodyType.StaticBody;
-                bodyDef.position.set((rectangle.getX() + rectangle.getWidth() / 2) / Config.SCALE, (rectangle.getY() + rectangle.getHeight() / 2) / Config.SCALE);
-
-                body = world.createBody(bodyDef);
-
-                shape.setAsBox(rectangle.getWidth() / 2 / Config.SCALE, rectangle.getHeight() / 2 / Config.SCALE);
-                fixture.shape = shape;
+            for (MapObject object : tiledMap.getLayers().get(layer).getObjects().getByType(RectangleMapObject.class)) {
+                Tile tile;
 
                 // TODO - Create if statements for properties and such to declare friction and restitution
+                if (object.getProperties().containsKey("breakable")) {
+                    if (object.getProperties().get("breakable").equals("true")) {
+                        // TODO - declare new instance of breakable brick
+                        tile = new BrickTile(tiledMap, world, object, itemManager);
+                        tile.create();
+                    } else {
+                        if (object.getProperties().containsKey("item")) {
+                            // TODO - declare new instance of coin block with item
+                            tile = new ItemBlockTile(tiledMap, world, object, itemManager);
+                            tile.create();
+                        } else {
+                            // TODO - declare new instance of coin block without item
+                            tile = new ItemBlockTile(tiledMap, world, object, itemManager);
+                            tile.create();
+                        }
+                    }
+                } else {
+                    tile = new SolidTile(tiledMap, world, object, itemManager);
+                    tile.create();
+                }
 
-                body.createFixture(fixture);
             }
         }
     }

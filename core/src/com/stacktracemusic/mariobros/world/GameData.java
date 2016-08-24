@@ -62,6 +62,21 @@ public class GameData {
         }
     }
 
+    public void addCoin() {
+        this.coins += 1;
+        this.coinsDisplay.setText(String.format("%03d", this.coins));
+    }
+
+    public void addScore(int score) {
+        this.score += score;
+        this.scoreDisplay.setText(String.format("%06d", this.score));
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+        this.scoreDisplay.setText(String.format("%06d", this.score));
+    }
+
     public void setTime(int time) {
         this.time = time;
     }

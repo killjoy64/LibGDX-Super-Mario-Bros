@@ -19,6 +19,10 @@ public class GameWindow extends Game {
 
 		assetManager.load(Resources.ABOVE_GROUND_BGM, Music.class);
 		assetManager.load(Resources.COIN, Sound.class);
+		assetManager.load(Resources.MUSHROOM_SPAWN, Sound.class);
+		assetManager.load(Resources.MUSHROOM_USE, Sound.class);
+		assetManager.load(Resources.TILE_BREAK, Sound.class);
+		assetManager.load(Resources.TILE_BUMP, Sound.class);
 		assetManager.load(Resources.MARIO_SMALL_JUMP_SOUND, Sound.class);
 		assetManager.load(Resources.MARIO_SUPER_JUMP_SOUND, Sound.class);
 		assetManager.load(Resources.MARIO_DIE, Sound.class);
